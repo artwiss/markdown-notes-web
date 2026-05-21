@@ -1,26 +1,243 @@
 @import "tailwindcss";
 
+/* =========================
+   Theme Variables
+========================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f1117;
+  --background-secondary: #161a22;
+  --surface: #1c2230;
+  --surface-hover: #252d3d;
+
+  --foreground: #e6edf3;
+  --foreground-muted: #9aa4b2;
+
+  --border: #2d3748;
+
+  --accent: #7c9cff;
+  --accent-hover: #9ab2ff;
+
+  --shadow: rgba(0, 0, 0, 0.35);
+
+  --radius: 14px;
+
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================
+   Base
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top, #1b2230 0%, #0f1117 45%),
+    var(--background);
+
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-sans);
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================
+   Layout
+========================= */
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+/* =========================
+   Typography
+========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+
+  font-weight: 700;
+  letter-spacing: -0.03em;
+
+  color: var(--foreground);
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 3rem;
+}
+
+p {
+  color: var(--foreground-muted);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* =========================
+   Tree / Sidebar Styling
+========================= */
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tree-item {
+  display: flex;
+  align-items: center;
+
+  padding: 8px 12px;
+
+  border-radius: 10px;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.tree-item:hover {
+  background: var(--surface-hover);
+  transform: translateX(2px);
+}
+
+.tree-folder {
+  color: #cdd9e5;
+  font-weight: 600;
+}
+
+.tree-note {
+  color: var(--foreground-muted);
+}
+
+.tree-note:hover {
+  color: var(--foreground);
+}
+
+/* =========================
+   Search Bar
+========================= */
+
+input[type="text"],
+input[type="search"] {
+  width: 100%;
+
+  padding: 14px 16px;
+  margin-bottom: 24px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  background: var(--surface);
+  color: var(--foreground);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px rgba(124, 156, 255, 0.15);
+
+  background: var(--background-secondary);
+}
+
+/* =========================
+   Cards / Containers
+========================= */
+
+.card {
+  background: rgba(28, 34, 48, 0.7);
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  padding: 24px;
+
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px var(--shadow);
+}
+
+/* =========================
+   Scrollbar
+========================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2f384a;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3c4960;
+}
+
+/* =========================
+   Selection
+========================= */
+
+::selection {
+  background: rgba(124, 156, 255, 0.25);
+  color: white;
 }
