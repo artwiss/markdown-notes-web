@@ -11,7 +11,7 @@ export function buildDotPathTree(files: string[]): TreeNode[] {
   const rootMap = new Map<string, TreeNode>();
 
   for (const file of files) {
-    const parts = file.replace(/\.md$/, "").split(".");
+    const parts = file.replace(/\.(md|png|jpg|jpeg|webp)$/i, "").split(".");
     let currentMap = rootMap;
     let fullPath = "";
 
