@@ -21,7 +21,7 @@ export function buildDotPathTree(files: string[]): TreeNode[] {
 
       if (!currentMap.has(part)) {
         currentMap.set(part, {
-          name: part,
+          name: part.replace(/\.md$/, ""),
           fullPath: fullPath + ".md",
           hasNote: false,
           children: [],
