@@ -29,7 +29,7 @@ export async function listMarkdownFiles(): Promise<string[]> {
 
   // Step 3: filter for .md files only
   const mdFiles = treeData.tree
-    .filter((item) => item.type === "blob" && item.path?.endsWith(".md"))
+    .filter((item) => item.type === "blob" && (item.path?.endsWith(".md") || item.path?.endsWith(".png")))
     .map((item) => item.path!); // full relative paths like "project/foo.md"
   return mdFiles;
 }
