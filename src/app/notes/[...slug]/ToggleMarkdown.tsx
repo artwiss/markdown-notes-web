@@ -80,6 +80,19 @@ const markdownComponents: Components = {
       {children}
     </a>
   ),
+  img: ({ src = "", alt = "" }) => {
+    const fixedSrc = src.startsWith("http")
+      ? src
+      : `/api/image?path=${encodeURIComponent(src)}`;
+  
+    return (
+      <img
+        src={fixedSrc}
+        alt={alt}
+        className="rounded-xl border border-gray-800 my-6 max-w-full shadow-lg"
+      />
+    );
+  },
   code: ({ className, children }) => {
     const isBlock =
       typeof className === "string" && className.startsWith("language-");
