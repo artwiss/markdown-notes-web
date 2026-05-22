@@ -25,7 +25,7 @@ export async function GET(req: Request) {
       ref: branch,
     });
 
-    const data: any = response.data;
+    const data = response.data;
 
     if (Array.isArray(data) || data.type !== "file") {
       return new Response("Invalid image path", { status: 404 });
