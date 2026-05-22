@@ -26,12 +26,27 @@ export async function listMarkdownFiles(): Promise<string[]> {
     tree_sha: treeSha,
     recursive: "true",
   });
-
-  // Step 3: filter for .md files only
-  const mdFiles = treeData.tree
-    .filter((item) => item.type === "blob" && (item.path?.endsWith(".md") || item.path?.endsWith(".png")))
-    .map((item) => item.path!); // full relative paths like "project/foo.md"
-  return mdFiles;
+  
+  // notes only (for tree)
+  const notes = treeData.tree
+    .filter(
+      (item) =>
+        item.type === "blob" &&
+        item.path?.endsWith(".md")
+    )
+    .map((item) => item.path!);
+  
+  // images (NOT used in tree, but now available)
+  const images = treeData.tree
+    .filter(
+      (item) =>
+        item.type === "blob" &&
+        item.path?.match(/\.(png|jpg|jpeg|webp)$/)
+    )
+    .map((item) => item.path!);
+  
+  // return ONLY notes so UI stays clean
+  return notes;
 }
 
 export async function getNote(filename: string): Promise<{ content: string }> {
