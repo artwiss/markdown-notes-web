@@ -24,7 +24,11 @@ export default function HomePage({ files }: { files: string[] }) {
   }, [files, query]);
 
   // 2. Build nested tree
-  const tree = useMemo(() => buildFileTree(filtered), [filtered]);
+  const visibleFiles = filtered.filter((f) => f.endsWith(".md"));
+  const tree = useMemo(
+    () => buildFileTree(visibleFiles),
+    [visibleFiles]
+  );
 
   return (
     <div className="max-w-xl">
