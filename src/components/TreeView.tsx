@@ -8,6 +8,7 @@ export function TreeView({ nodes }: { nodes: FileNode[] }) {
     <ul className="pl-4">
       {nodes.map((node) => {
         const isFolder = Array.isArray(node.children);
+
         return (
           <li key={node.path} className="mb-1">
             {isFolder ? (
@@ -17,10 +18,13 @@ export function TreeView({ nodes }: { nodes: FileNode[] }) {
                 href={`/notes/${encodeURIComponent(node.path)}`}
                 className="text-blue-600 dark:text-blue-400 hover:underline"
               >
-                {node.name}
+                {node.name.replace(/\.md$/, "")}
               </Link>
             )}
-            {isFolder && node.children && <TreeView nodes={node.children} />}
+
+            {isFolder && node.children && (
+              <TreeView nodes={node.children} />
+            )}
           </li>
         );
       })}
