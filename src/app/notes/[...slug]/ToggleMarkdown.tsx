@@ -80,10 +80,12 @@ const markdownComponents: Components = {
       {children}
     </a>
   ),
-  img: ({ src = "", alt = "" }) => {
+  img: ({ src, alt = "" }) => {
+    if (typeof src !== "string") return null;
+  
     const fixedSrc = src.startsWith("http")
       ? src
-      : `/api/image?path=${encodeURIComponent(src)}`;
+      : `/api/image?path=${src}`;
   
     return (
       <img
