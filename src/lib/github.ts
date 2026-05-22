@@ -37,13 +37,13 @@ export async function listMarkdownFiles(): Promise<string[]> {
     .map((item) => item.path!);
   
   // images (NOT used in tree, but now available)
-  const images = treeData.tree
-    .filter(
-      (item) =>
-        item.type === "blob" &&
-        item.path?.match(/\.(png|jpg|jpeg|webp)$/)
-    )
-    .map((item) => item.path!);
+  // const images = treeData.tree
+  //   .filter(
+  //     (item) =>
+  //       item.type === "blob" &&
+  //       item.path?.match(/\.(png|jpg|jpeg|webp)$/)
+  //   )
+  //   .map((item) => item.path!);
   
   // return ONLY notes so UI stays clean
   return notes;
