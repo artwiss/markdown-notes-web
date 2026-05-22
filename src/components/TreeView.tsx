@@ -12,7 +12,7 @@ export function TreeView({ nodes }: { nodes: FileNode[] }) {
         return (
           <li key={node.path} className="mb-1">
             {isFolder ? (
-              <div className="font-semibold">{node.name.replace(/\/$/, "")}/</div>
+              <div className="font-semibold">{node.name}/</div>
             ) : (
               <Link
                 href={`/notes/${encodeURIComponent(node.path)}`}
